@@ -8,6 +8,9 @@ import {
 import {
     terser
 } from "rollup-plugin-terser";
+import vuePlugin from 'rollup-plugin-vue'
+import postcss from 'rollup-plugin-postcss'
+
 
 
 export default {
@@ -31,18 +34,27 @@ export default {
 
     plugins: [nodeResolve(), babel({
         exclude: 'node_modules/**' // 只编译我们的源代码
-    }), commonjs(), json(), terser()],
+    }), commonjs(), json(), terser(), vuePlugin(), postcss()],
     // 和webpack一致 排除打包 希望外部引用 避免重复打包
-    external: ["sam-test-data"],
+    external: ["sam-test-data", "vue"],
     output: [{
         file: path.resolve(__dirname, "./dist/index.min.js"),
         name: "qingfengxulai", // umd下必须 其实就是webpack的library
-        format: "umd"
+        format: "umd",
+        globals: {
+            vue: "Vue"
+        }
     }, {
         file: path.resolve(__dirname, "./dist/index.es.min.js"),
-        format: "es"
+        format: "es",
+        globals: {
+            vue: "Vue"
+        }
     }, {
         file: path.resolve(__dirname, "./dist/index.cjs.min.js"),
-        format: "cjs"
+        format: "cjs",
+        globals: {
+            vue: "Vue"
+        }
     }]
 }

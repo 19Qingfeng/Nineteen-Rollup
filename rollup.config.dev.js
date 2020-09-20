@@ -5,9 +5,14 @@ import json from '@rollup/plugin-json';
 import {
     nodeResolve
 } from '@rollup/plugin-node-resolve';
+import vuePlugin from 'rollup-plugin-vue'
+import postcss from 'rollup-plugin-postcss'
+
 // import {
 //     terser
 // } from "rollup-plugin-terser";
+
+
 
 
 export default {
@@ -29,20 +34,33 @@ export default {
     // rollup-plugin-terser 压缩代码 其实就是webpack中的terser-webpack-plugin
     // 不过webapck本身集成了压缩插件 rollup没有需要自己引入
 
+    // rollup-plugin-vue 让rollup认识vue代码
+
+    // postcss插件 使rollup识别css代码，可以识别scss/less/stylus等以及模块化都支持
+
     plugins: [nodeResolve(), babel({
             exclude: 'node_modules/**' // 只编译我们的源代码
-        }), commonjs(), json()
+        }), commonjs(), json(), vuePlugin(),
+        postcss([])
         // terser()
     ],
     // 和webpack一致 排除打包 希望外部引用 避免重复打包
-    external: ["sam-test-data"],
+    external: ["sam-test-data", "vue"],
     output: [{
         file: path.resolve(__dirname, "./dist/index.js"),
+        // 关于globals配置针对umd情况下 script引入形式的 external配置。
+        // 举个例子来说把 比如项目中使用 import vue from vue，external [ 'vue' ]
+        // 那么在esm 情况下 会去执行 import vue from vue
+        // 但是在script标签引入下 不支持esm from vue 就会去全局变量中寻找配置赋值
+        // 这里相当于 将全局的Vue赋值给from的vue模块使用
+        globals: {
+            vue: 'Vue'
+        },
         name: "qingfengxulai", // umd下必须 其实就是webpack的library
         format: "umd"
     }, {
         file: path.resolve(__dirname, "./dist/index.es.js"),
-        format: "es"
+        format: "es",
     }, {
         file: path.resolve(__dirname, "./dist/index.cjs.js"),
         format: "cjs"

@@ -8,9 +8,27 @@
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.js"></script>
     <script src="../dist/index.js"></script>
     <script>
         console.log(qingfengxulai, "xulai");
+    </script>
+    <div id="app">
+        {{message}}
+
+        <test></test>
+    </div>
+    <script>
+        Vue.createApp({
+                setup() {
+                    const message = "hello world";
+                    return {
+                        message,
+                    };
+                },
+            })
+            .use(qingfengxulai)
+            .mount("#app");
     </script>
 </body>
 
