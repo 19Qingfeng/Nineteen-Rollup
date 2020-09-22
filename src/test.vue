@@ -1,6 +1,6 @@
 <template>
 
-    <div class="test">{{message}}</div>
+    <div class="test">wang.haoyu:{{message}}</div>
 
 </template>
 <script>
