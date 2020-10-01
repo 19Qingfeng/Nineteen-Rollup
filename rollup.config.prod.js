@@ -36,7 +36,7 @@ export default {
         exclude: 'node_modules/**' // 只编译我们的源代码
     }), commonjs(), json(), terser(), vuePlugin(), postcss()],
     // 和webpack一致 排除打包 希望外部引用 避免重复打包
-    external: ["sam-test-data", "vue"],
+    external: ["sam-test-data", "vue", 'echarts'],
     output: [{
         file: path.resolve(__dirname, "./dist/index.min.js"),
         name: "qingfengxulai", // umd下必须 其实就是webpack的library

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="m_loading_cmp">
         <svg
             :height="height"
             :width="width"
@@ -13,7 +13,7 @@
                 fill="transparent"
                 stroke-dasharray="39"
                 stroke-linecap="round"
-                :stroke="outerColoe"
+                :stroke="outerColor"
             >
                 <animateTransform
                     attributeName="transform"
@@ -54,15 +54,13 @@
                 ></animate>
             </circle>
         </svg>
-        <div>
-            <slot></slot>
-        </div>
+        <slot></slot>
     </div>
 </template>
 <script>
 import { computed } from "vue";
 export default {
-  name: "Loading",
+  name: "LoadingCmp",
   props: {
     height: {
       type: Number,
@@ -100,3 +98,9 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.m_loading_cmp {
+  display: flex;
+  flex-direction: column;
+}
+</style>

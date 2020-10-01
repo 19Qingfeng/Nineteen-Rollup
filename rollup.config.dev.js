@@ -45,7 +45,7 @@ export default {
         // terser()
     ],
     // 和webpack一致 排除打包 希望外部引用 避免重复打包
-    external: ["sam-test-data", "vue"],
+    external: ["sam-test-data", "vue", "echarts"],
     output: [{
         file: path.resolve(__dirname, "./dist/index.js"),
         // 关于globals配置针对umd情况下 script引入形式的 external配置。

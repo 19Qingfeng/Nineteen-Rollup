@@ -145,6 +145,7 @@ export default {
     });
     const init = () => {
       const dom = getCurrentInstance().ctx.$refs["wapper"];
+      //   console.log(wapper.value, "wapper"); // 也可以直接使用wapper.value
       height.value = dom.clientHeight;
       width.value = dom.clientWidth;
     };
