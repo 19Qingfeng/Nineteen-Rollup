@@ -78,7 +78,6 @@ export default {
     const initObserver = () => {
       const MutationObserver = window.MutationObserver;
       observer = new MutationObserver((e) => {
-        console.log("触发window.MutationObserver");
         init(); // 重新更新DOM (当改变尺寸的时候)
         updateScale();
       });
@@ -99,7 +98,6 @@ export default {
       updateSize();
       updateScale();
       initObserver();
-      //   debounce 存疑问
       window.addEventListener("resize", debounce(50, initSize));
       ready.value = true;
     });

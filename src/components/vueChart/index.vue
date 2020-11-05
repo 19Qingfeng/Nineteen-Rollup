@@ -1,33 +1,45 @@
 <template>
     <div
         class="echarts"
-        :ref="chart"
+        ref="chart"
     >
-
     </div>
 </template>
 <script>
 import { ref, watch, onMounted } from "vue";
 import Echarts from "echarts";
 export default {
-  name: "QChart",
+  name: "QaCharts",
   props: {
     options: Object,
+    theme: [String, Object],
   },
-  setup(options) {
-    let dom;
+  setup(prop) {
     let chart = ref(null);
+    let chartObj;
+    const initChart = () => {
+      if (!chartObj) {
+        chartObj = Echarts.init(chart.value);
+      }
+      if (!prop.options) return;
+      chartObj.setOption(prop.options);
+    };
     watch(
-      () => props.options,
-      () => {}
+      () => prop.options,
+      () => {
+        initChart();
+      }
     );
+    onMounted(() => {
+      initChart();
+    });
     return {
       chart,
     };
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .echarts {
   height: 100%;
   width: 100%;

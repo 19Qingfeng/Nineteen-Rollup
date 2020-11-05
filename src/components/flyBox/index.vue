@@ -138,13 +138,16 @@ export default {
     const height = ref(0);
     const width = ref(0);
     const wapper = ref(null);
+    console.log(wapper, "wapper");
     const path = computed(() => {
       return `M5 5 L${width.value - 5} 5 L${width.value - 5} ${
         height.value - 5
       } L5 ${height.value - 5} Z`;
     });
     const init = () => {
-      const dom = getCurrentInstance().ctx.$refs["wapper"];
+      console.log(wapper, "wapper");
+      // const dom = getCurrentInstance().ctx.$refs["wapper"];
+      const dom = wapper.value;
       //   console.log(wapper.value, "wapper"); // 也可以直接使用wapper.value
       height.value = dom.clientHeight;
       width.value = dom.clientWidth;
